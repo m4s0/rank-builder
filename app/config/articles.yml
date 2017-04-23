@@ -1,0 +1,123 @@
+parameters:
+  articles:
+
+    article_1:
+      id: 1
+      image: true
+      publishedAt: '-1 days'
+      votesUp: 3
+      votesDown: 5
+      viewsCount: 100
+      commentsCount: 8
+      isPrimapagina: true
+      editorRating: 3
+
+    article_2:
+      id: 2
+      image: true
+      publishedAt: '-10 min'
+      votesUp: 0
+      votesDown: 5
+      viewsCount: 10
+      commentsCount: 2
+      isPrimapagina: false
+      editorRating: 1
+
+    article_3:
+      id: 3
+      image: true
+      publishedAt: ''
+      votesUp: 0
+      votesDown: 0
+      viewsCount: 0
+      commentsCount: 0
+      isPrimapagina: false
+      editorRating: 1
+
+    article_4:
+      id: 4
+      image: true
+      publishedAt: ''
+      votesUp: 0
+      votesDown: 0
+      viewsCount: 0
+      commentsCount: 0
+      isPrimapagina: true
+      editorRating: 1
+
+    article_5:
+      id: 5
+      image: false
+      publishedAt: '-3 hours'
+      votesUp: 1
+      votesDown: 0
+      viewsCount: 10
+      commentsCount: 1
+      isPrimapagina: false
+      editorRating: 1
+
+    article_6:
+      id: 6
+      image: true
+      publishedAt: '-18 hours'
+      votesUp: 15
+      votesDown: 4
+      viewsCount: 35
+      commentsCount: 3
+      isPrimapagina: true
+      editorRating: 1
+
+    article_7:
+      id: 7
+      image: true
+      publishedAt: '-3 days'
+      votesUp: 20
+      votesDown: 2
+      viewsCount: 50
+      commentsCount: 5
+      isPrimapagina: false
+      editorRating: 1
+
+    article_8:
+      id: 8
+      image: true
+      publishedAt: '-1 days'
+      votesUp: 1600
+      votesDown: 0
+      viewsCount: 320
+      commentsCount: 40
+      isPrimapagina: false
+      editorRating: 1
+
+    article_9:
+      id: 9
+      image: false
+      publishedAt: '-1 days'
+      votesUp: 0
+      votesDown: 5
+      viewsCount: 0
+      commentsCount: 3
+      isPrimapagina: false
+      editorRating: 1
+
+    article_10:
+      id: 10
+      image: true
+      publishedAt: '-2 days'
+      votesUp: 0
+      votesDown: 1000
+      viewsCount: 0
+      commentsCount: 0
+      isPrimapagina: false
+      editorRating: 1
+
+    article_11:
+      id: 11-errore
+      image: true
+      publishedAt: '-1 days'
+      votesUp: 0
+      votesDown: 1000
+      viewsCount: 0
+      commentsCount: 0
+      isPrimapagina: false
+      editorRating: 1

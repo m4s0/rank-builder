@@ -1,0 +1,10 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+    <div class="row">
+        {% for article in articles %}
+            {{ include('AppBundle:Default:_article.html.twig') }}
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+<div class="col-xs-12 col-md-4">
+    <div class="box-container">
+        <div class="box">
+            <p class="box-content">
+                id_{{ article.id }}
+            </p>
+        </div>
+    </div>
+
+    <i class="fa fa-clock-o"
+       aria-hidden="true"
+       style="color: #9B9B9B">
+        {{ article.dateTimePublic|date('H:i d-m-Y', 'Europe/Rome') }}
+    </i>
+
+    <div style="float: right">
+        <i class="fa fa-thumbs-up" aria-hidden="true" style="color: #0D793D"></i> {{ article.votesUp }}
+        <i class="fa fa-thumbs-down" aria-hidden="true" style="color: #D0011B "></i> {{ article.votesDown }}
+        <i class="fa fa-eye" aria-hidden="true" style="margin-left: 5px; color: #E97E1B"></i> {{ article.viewsCount }}
+        <i class="fa fa-comment" aria-hidden="true" style="margin-left: 5px;"></i> {{ article.commentsCount }}
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-condensed table-bordered">
+            <th class="info table-centered">score</th>
+            <th class="success table-centered">date</th>
+            <th class="warning table-centered">votes</th>
+            <th class="warning table-centered">views</th>
+            <th class="warning table-centered">comments</th>
+            <th class="active table-centered">editor</th>
+            <th class="active table-centered">primaPagina</th>
+            <th class="active table-centered">image</th>
+
+            <tr>
+                <td class="table-centered"><b>{{ article.score|round(2) }}</b></td>
+                <td class="table-centered">{{ article.dateTimeScore|round(4) }}</td>
+                <td class="table-centered">{{ article.votesScore|round(2) }}</td>
+                <td class="table-centered">{{ article.viewsScore|round(2) }}</td>
+                <td class="table-centered">{{ article.commentsScore|round(2) }}</td>
+                <td class="table-centered">{{ article.editorRating|round(2) }}</td>
+                <td class="table-centered">{{ article.isPrimapaginaScore|round(2) }}</td>
+                <td class="table-centered">{{ article.imageScore|round(2) }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
