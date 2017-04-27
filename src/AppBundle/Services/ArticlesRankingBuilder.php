@@ -74,7 +74,7 @@ class ArticlesRankingBuilder
      *
      * @return ArticleViewModel[]
      */
-    public function execute(array $articles): array
+    public function execute(array $articles)
     {
         $tmp = [];
         /** @var ArticleViewModel $article */
@@ -100,7 +100,7 @@ class ArticlesRankingBuilder
      *
      * @return float
      */
-    private function getScore(ArticleViewModel $article): float
+    private function getScore(ArticleViewModel $article)
     {
         $votesScore         = 100 + $this->votesWeight * $this->getVotesScore($article);
         $viewsScore         = $this->viewsWeight * $this->getViewsScore($article, 100, 30);
@@ -118,7 +118,7 @@ class ArticlesRankingBuilder
                 $editorRatingScore +
                 $isPrimapaginaScore +
                 $imageScore
-            ) /
+            )/
             /**
              * @todo migliorare funzione, se segno minore funziona in modo inverso
              */
@@ -152,7 +152,7 @@ class ArticlesRankingBuilder
      *
      * @return float
      */
-    private static function scoreConfidenceInterval($positiveRatings, $totalRatings, $confidence): float
+    private static function scoreConfidenceInterval($positiveRatings, $totalRatings, $confidence)
     {
         if ($totalRatings === 0) {
             return (float)0;
@@ -173,7 +173,7 @@ class ArticlesRankingBuilder
      *
      * @return float
      */
-    private function getVotesScore(ArticleViewModel $article): float
+    private function getVotesScore(ArticleViewModel $article)
     {
         $positiveScore = self::scoreConfidenceInterval(
             $article->getVotesUp(),
@@ -201,7 +201,7 @@ class ArticlesRankingBuilder
      *
      * @return float
      */
-    private function getViewsScore(ArticleViewModel $article, float $k, int $j): float
+    private function getViewsScore(ArticleViewModel $article, $k, $j)
     {
         return $k * (1 - M_E ** -($article->getViewsCount() / $j));
     }
@@ -215,7 +215,7 @@ class ArticlesRankingBuilder
      *
      * @return float
      */
-    private function getCommentsScore(ArticleViewModel $article, float $k, int $j): float
+    private function getCommentsScore(ArticleViewModel $article, $k, $j)
     {
         return $k * (1 - M_E ** -($article->getCommentsCount() / $j));
     }
@@ -225,7 +225,7 @@ class ArticlesRankingBuilder
      *
      * @return float
      */
-    private function getEditorRatingScore(ArticleViewModel $article): float
+    private function getEditorRatingScore(ArticleViewModel $article)
     {
         return (float)$article->getEditorRating();
     }
@@ -235,7 +235,7 @@ class ArticlesRankingBuilder
      *
      * @return float
      */
-    private function getIsPrimapaginaScore(ArticleViewModel $article): float
+    private function getIsPrimapaginaScore(ArticleViewModel $article)
     {
         return (float)$article->isPrimapagina();
     }
@@ -245,7 +245,7 @@ class ArticlesRankingBuilder
      *
      * @return float
      */
-    private function getImageScore(ArticleViewModel $article): float
+    private function getImageScore(ArticleViewModel $article)
     {
         return (float)$article->hasImage();
     }
@@ -260,7 +260,7 @@ class ArticlesRankingBuilder
      *
      * @return float
      */
-    private function getDateTimeScore(ArticleViewModel $article, int $lambda = 86400): float
+    private function getDateTimeScore(ArticleViewModel $article, $lambda = 86400)
     {
         $interval = (new \DateTime())->getTimestamp() - $article->howOldIsDateTime()->getTimestamp();
 

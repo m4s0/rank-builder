@@ -38,7 +38,7 @@ class GetRankedArticles
     /**
      * @return ArticleViewModel[]
      */
-    public function execute(): array
+    public function execute()
     {
         $articlesViewModel = [];
         foreach ($this->articles as $article) {

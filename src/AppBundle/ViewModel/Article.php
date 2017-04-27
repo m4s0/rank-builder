@@ -61,7 +61,7 @@ class Article
     /**
      * @return bool
      */
-    public function hasImage(): bool
+    public function hasImage()
     {
         return (bool)$this->image;
     }
@@ -69,7 +69,7 @@ class Article
     /**
      * @return string
      */
-    public function howOldIs(): string
+    public function howOldIs()
     {
         return $this->howOldIs;
     }
@@ -77,7 +77,7 @@ class Article
     /**
      * @return \DateTime
      */
-    public function howOldIsDateTime(): \DateTime
+    public function howOldIsDateTime()
     {
         return $this->howOldIsDateTime;
     }
@@ -85,7 +85,7 @@ class Article
     /**
      * @return int
      */
-    public function getVotesUp(): int
+    public function getVotesUp()
     {
         return $this->votesUp;
     }
@@ -93,7 +93,7 @@ class Article
     /**
      * @return int
      */
-    public function getVotesDown(): int
+    public function getVotesDown()
     {
         return $this->votesDown;
     }
@@ -101,7 +101,7 @@ class Article
     /**
      * @return int
      */
-    public function getViewsCount(): int
+    public function getViewsCount()
     {
         return $this->viewsCount;
     }
@@ -109,7 +109,7 @@ class Article
     /**
      * @return int
      */
-    public function getCommentsCount(): int
+    public function getCommentsCount()
     {
         return $this->commentsCount;
     }
@@ -117,7 +117,7 @@ class Article
     /**
      * @return bool
      */
-    public function isPrimapagina(): bool
+    public function isPrimapagina()
     {
         return $this->isPrimapagina;
     }
@@ -125,7 +125,7 @@ class Article
     /**
      * @return float
      */
-    public function getEditorRating(): float
+    public function getEditorRating()
     {
         return $this->editorRating;
     }
@@ -135,7 +135,7 @@ class Article
      *
      * @return Article
      */
-    public static function create(array $data): Article
+    public static function create(array $data)
     {
         $article = new self();
 
