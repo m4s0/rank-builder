@@ -102,7 +102,7 @@ class ArticlesRankingBuilder
      */
     private function getScore(ArticleViewModel $article): float
     {
-        $votesScore         = $this->votesWeight * $this->getVotesScore($article);
+        $votesScore         = 100 + $this->votesWeight * $this->getVotesScore($article);
         $viewsScore         = $this->viewsWeight * $this->getViewsScore($article, 100, 30);
         $commentsScore      = $this->commentsWeight * $this->getCommentsScore($article, 10, 4);
         $editorRatingScore  = $this->editorRatingWeight * $this->getEditorRatingScore($article);
@@ -118,7 +118,10 @@ class ArticlesRankingBuilder
                 $editorRatingScore +
                 $isPrimapaginaScore +
                 $imageScore
-            ) *
+            ) /
+            /**
+             * @todo migliorare funzione, se segno minore funziona in modo inverso
+             */
             $dateTimeScore;
 
         /**
@@ -259,11 +262,15 @@ class ArticlesRankingBuilder
      */
     private function getDateTimeScore(ArticleViewModel $article, int $lambda = 86400): float
     {
-        $interval = (new \DateTime())->getTimestamp() - $article->getDateTimePublic()->getTimestamp();
+        $interval = (new \DateTime())->getTimestamp() - $article->howOldIsDateTime()->getTimestamp();
 
-        return M_E ** -($interval / $lambda);
+//        return M_E ** -($interval / $lambda);
 
-        return 1 - M_E ** ($interval / $j);
+        return 1 + (($interval / $lambda) ** 2);
+
+        return 1 / (1 - M_E ** -($interval / $lambda));
+
+        return 1 - M_E ** ($interval / $lambda);
 
         return -($interval / $lambda) ** 2;
     }

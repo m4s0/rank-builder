@@ -18,9 +18,13 @@ class Article
      */
     private $image;
     /**
+     * @var string
+     */
+    protected $howOldIs;
+    /**
      * @var \DateTime
      */
-    private $publishedAt;
+    private $howOldIsDateTime;
     /**
      * @var int
      */
@@ -63,11 +67,19 @@ class Article
     }
 
     /**
+     * @return string
+     */
+    public function howOldIs(): string
+    {
+        return $this->howOldIs;
+    }
+
+    /**
      * @return \DateTime
      */
-    public function getDateTimePublic(): \DateTime
+    public function howOldIsDateTime(): \DateTime
     {
-        return $this->publishedAt;
+        return $this->howOldIsDateTime;
     }
 
     /**
@@ -127,15 +139,16 @@ class Article
     {
         $article = new self();
 
-        $article->id            = $data['id'];
-        $article->image         = $data['image'];
-        $article->publishedAt   = new \DateTime($data['publishedAt']);
-        $article->votesUp       = $data['votesUp'];
-        $article->votesDown     = $data['votesDown'];
-        $article->viewsCount    = $data['viewsCount'];
-        $article->commentsCount = $data['commentsCount'];
-        $article->isPrimapagina = $data['isPrimapagina'];
-        $article->editorRating  = $data['editorRating'];
+        $article->id               = $data['id'];
+        $article->image            = $data['image'];
+        $article->howOldIs         = $data['howOldIs'];
+        $article->howOldIsDateTime = new \DateTime($data['howOldIs']);
+        $article->votesUp          = $data['votesUp'];
+        $article->votesDown        = $data['votesDown'];
+        $article->viewsCount       = $data['viewsCount'];
+        $article->commentsCount    = $data['commentsCount'];
+        $article->isPrimapagina    = $data['isPrimapagina'];
+        $article->editorRating     = $data['editorRating'];
 
         return $article;
     }

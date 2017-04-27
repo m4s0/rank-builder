@@ -4,7 +4,7 @@ parameters:
     article_1:
       id: 1
       image: true
-      publishedAt: '-1 days'
+      howOldIs: '-1 days'
       votesUp: 3
       votesDown: 5
       viewsCount: 100
@@ -15,7 +15,7 @@ parameters:
     article_2:
       id: 2
       image: true
-      publishedAt: '-10 min'
+      howOldIs: '-10 min'
       votesUp: 0
       votesDown: 5
       viewsCount: 10
@@ -26,7 +26,7 @@ parameters:
     article_3:
       id: 3
       image: true
-      publishedAt: ''
+      howOldIs: ''
       votesUp: 0
       votesDown: 0
       viewsCount: 0
@@ -37,7 +37,7 @@ parameters:
     article_4:
       id: 4
       image: true
-      publishedAt: ''
+      howOldIs: ''
       votesUp: 0
       votesDown: 0
       viewsCount: 0
@@ -48,7 +48,7 @@ parameters:
     article_5:
       id: 5
       image: false
-      publishedAt: '-3 hours'
+      howOldIs: '-3 hours'
       votesUp: 1
       votesDown: 0
       viewsCount: 10
@@ -59,7 +59,7 @@ parameters:
     article_6:
       id: 6
       image: true
-      publishedAt: '-18 hours'
+      howOldIs: '-18 hours'
       votesUp: 15
       votesDown: 4
       viewsCount: 35
@@ -70,7 +70,7 @@ parameters:
     article_7:
       id: 7
       image: true
-      publishedAt: '-3 days'
+      howOldIs: '-3 days'
       votesUp: 20
       votesDown: 2
       viewsCount: 50
@@ -81,7 +81,7 @@ parameters:
     article_8:
       id: 8
       image: true
-      publishedAt: '-1 days'
+      howOldIs: '-1 days'
       votesUp: 1600
       votesDown: 0
       viewsCount: 320
@@ -92,7 +92,7 @@ parameters:
     article_9:
       id: 9
       image: false
-      publishedAt: '-1 days'
+      howOldIs: '-1 days'
       votesUp: 0
       votesDown: 5
       viewsCount: 0
@@ -103,7 +103,7 @@ parameters:
     article_10:
       id: 10
       image: true
-      publishedAt: '-2 days'
+      howOldIs: '-2 days'
       votesUp: 0
       votesDown: 1000
       viewsCount: 0
@@ -112,12 +112,78 @@ parameters:
       editorRating: 1
 
     article_11:
-      id: 11-errore
+      id: 11
       image: true
-      publishedAt: '-1 days'
+      howOldIs: '-1 days'
       votesUp: 0
       votesDown: 1000
       viewsCount: 0
       commentsCount: 0
       isPrimapagina: false
+      editorRating: 1
+
+    article_12:
+      id: 12
+      image: true
+      howOldIs: '-15 hours'
+      votesUp: 2
+      votesDown: 1
+      viewsCount: 150
+      commentsCount: 5
+      isPrimapagina: false
+      editorRating: 1
+
+    article_13:
+      id: 13
+      image: true
+      howOldIs: '-13 hours'
+      votesUp: 2
+      votesDown: 6
+      viewsCount: 130
+      commentsCount: 0
+      isPrimapagina: false
+      editorRating: 1
+
+    article_14:
+      id: 14
+      image: true
+      howOldIs: '-13 days'
+      votesUp: 5
+      votesDown: 1
+      viewsCount: 30
+      commentsCount: 10
+      isPrimapagina: false
+      editorRating: 1
+
+    article_15:
+      id: 15
+      image: true
+      howOldIs: '-1 months'
+      votesUp: 30
+      votesDown: 10
+      viewsCount: 100
+      commentsCount: 30
+      isPrimapagina: true
+      editorRating: 1
+
+    article_16:
+      id: 16
+      image: true
+      howOldIs: '-1 years'
+      votesUp: 30
+      votesDown: 10
+      viewsCount: 100
+      commentsCount: 10
+      isPrimapagina: true
+      editorRating: 1
+
+    article_17:
+      id: 17
+      image: true
+      howOldIs: '-13 months'
+      votesUp: 30
+      votesDown: 1
+      viewsCount: 140
+      commentsCount: 30
+      isPrimapagina: true
       editorRating: 1
