@@ -118,7 +118,7 @@ class ArticlesRankingBuilder
                 $editorRatingScore +
                 $isPrimapaginaScore +
                 $imageScore
-            ) /
+            ) *
             /**
              * @todo migliorare funzione, se segno minore funziona in modo inverso
              */
@@ -264,9 +264,9 @@ class ArticlesRankingBuilder
     {
         $interval = (new \DateTime())->getTimestamp() - $article->howOldIsDateTime()->getTimestamp();
 
-//        return M_E ** -($interval / $lambda);
-
-        return 1 + (($interval / $lambda) ** 2);
+        return M_E ** -($interval / $lambda);
+//
+//        return 1 + (($interval / $lambda) ** 2);
 
         return 1 / (1 - M_E ** -($interval / $lambda));
 
