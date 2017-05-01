@@ -2,21 +2,13 @@ services:
     app.service.articles_ranking_builder:
       class: AppBundle\Services\ArticlesRankingBuilder
       arguments:
-        - 100
+        - 4
+        - 3
+        - 4
+        - 5
         - 1
-        - 10
-        - 10
         - 1
         - 1
-        - 10
-
-#        - 10
-#        - 10
-#        - 5
-#        - 15
-#        - 10
-#        - 7
-#        - 5
 
     app.use_case.get_ranked_articles:
       class: AppBundle\UseCase\GetRankedArticles

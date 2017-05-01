@@ -36,7 +36,7 @@
         <table class="table table-condensed table-bordered">
             <th class="info table-centered">score</th>
             <th class="success table-centered">date</th>
-            <th class="warning table-centered">_</th>
+            {#<th class="warning table-centered">_</th>#}
             <th class="warning table-centered">votes</th>
             <th class="warning table-centered">views</th>
             <th class="warning table-centered">comments</th>
@@ -48,7 +48,7 @@
             <tr>
                 <td class="table-centered"><b>{{ article.score|round(2) }}</b></td>
                 <td class="table-centered">{{ article.dateTimeScore|round(4) }}</td>
-                <td class="table-centered">{{ total|round(0) }}</td>
+                {#<td class="table-centered">{{ total|round(0) }}</td>#}
                 <td class="table-centered">{{ article.votesScore|round(2) }}</td>
                 <td class="table-centered">{{ article.viewsScore|round(2) }}</td>
                 <td class="table-centered">{{ article.commentsScore|round(2) }}</td>

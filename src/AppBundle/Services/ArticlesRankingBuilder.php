@@ -11,6 +11,9 @@ use AppBundle\ViewModel\Article as ArticleViewModel;
  */
 class ArticlesRankingBuilder
 {
+    const PRIOR_UP   = 10;
+    const PRIOR_DOWN = 10;
+
     /**
      * @var int
      */
@@ -93,8 +96,17 @@ class ArticlesRankingBuilder
     }
 
     /**
-     * @todo valutare questo score
-     * @see  https://www.elastic.co/blog/found-function-scoring
+     * Weighted geometric mean
+     *
+     * @see  https://en.wikipedia.org/wiki/Weighted_geometric_mean
+     *
+     * ex_:
+     * S = (A^7 ✕ B^5)^[1/(7+5)]
+     *
+     *
+     *
+     * @todo valutare questo score https://www.elastic.co/blog/found-function-scoring
+     *
      *
      * @param ArticleViewModel $article
      *
@@ -102,27 +114,27 @@ class ArticlesRankingBuilder
      */
     private function getScore(ArticleViewModel $article): float
     {
-        $votesScore         = 100 + $this->votesWeight * $this->getVotesScore($article);
-        $viewsScore         = $this->viewsWeight * $this->getViewsScore($article, 100, 30);
-        $commentsScore      = $this->commentsWeight * $this->getCommentsScore($article, 10, 4);
-        $editorRatingScore  = $this->editorRatingWeight * $this->getEditorRatingScore($article);
-        $isPrimapaginaScore = $this->primaPaginaWeight * $this->getIsPrimapaginaScore($article);
-        $imageScore         = $this->articleImageWeight * $this->getImageScore($article);
-        $dateTimeScore      = $this->creationDateWeight * $this->getDateTimeScore($article);
+        $votesScore        = $this->getVotesScore($article);
+        $viewsScore        = $this->getViewsScore($article, 20, 6);
+        $commentsScore     = $this->getCommentsScore($article, 20, 8);
+        $editorRatingScore = $this->getEditorRatingScore($article);
+        $dateTimeScore     = $this->getDateTimeScore($article);
 
         $score =
             (
-                $votesScore +
-                $viewsScore +
-                $commentsScore +
-                $editorRatingScore +
-                $isPrimapaginaScore +
-                $imageScore
-            ) /
-            /**
-             * @todo migliorare funzione, se segno minore funziona in modo inverso
-             */
-            $dateTimeScore;
+                $votesScore ** $this->votesWeight *
+                $viewsScore ** $this->viewsWeight *
+                $commentsScore ** $this->commentsWeight *
+                $editorRatingScore ** $this->editorRatingWeight
+            ) ** (
+                1 /
+                (
+                    $this->votesWeight +
+                    $this->viewsWeight +
+                    $this->commentsWeight +
+                    $this->editorRatingWeight
+                )
+            );
 
         /**
          * @todo TO REMOVE
@@ -131,15 +143,17 @@ class ArticlesRankingBuilder
         $article->setViewsScore($viewsScore);
         $article->setCommentsScore($commentsScore);
         $article->setEditorRatingScore($editorRatingScore);
-        $article->setIsPrimapaginaScore($isPrimapaginaScore);
-        $article->setImageScore($imageScore);
         $article->setDateTimeScore($dateTimeScore);
         $article->setScore($score);
 
-        return $score;
+        return $score / $dateTimeScore;
     }
 
     /**
+     * Lower bound of Wilson score confidence interval for a Bernoulli parameter
+     *
+     * @see http://www.evanmiller.org/how-not-to-sort-by-average-rating.html
+     *
      * $positiveRatings is the number of positive ratings, $totalRatings is the total number of ratings, and
      * $confidence refers to the statistical confidence level: pick 0.95 to have a 95% chance that your lower bound is
      * correct, 0.975 to have a 97.5% chance, etc.
@@ -165,9 +179,20 @@ class ArticlesRankingBuilder
     }
 
     /**
-     * Lower bound of Wilson score confidence interval for a Bernoulli parameter
+     * @see http://www.evanmiller.org/bayesian-average-ratings.html
+     * @see https://en.wikipedia.org/wiki/Bayesian_average
      *
-     * @see http://www.evanmiller.org/how-not-to-sort-by-average-rating.html
+     * @param int $upVotes
+     * @param int $downVotes
+     *
+     * @return float
+     */
+    private static function bayesianAverage(int $upVotes, int $downVotes)
+    {
+        return ($upVotes + self::PRIOR_UP) / ($upVotes + self::PRIOR_UP + $downVotes + self::PRIOR_DOWN);
+    }
+
+    /**
      *
      * @param ArticleViewModel $article
      *
@@ -175,25 +200,11 @@ class ArticlesRankingBuilder
      */
     private function getVotesScore(ArticleViewModel $article): float
     {
-        $positiveScore = self::scoreConfidenceInterval(
-            $article->getVotesUp(),
-            $article->getVotesUp() + $article->getVotesDown(),
-            null
-        );
-
-//        return $positiveScore;
-
-        $negativeScore = self::scoreConfidenceInterval(
-            $article->getVotesDown(),
-            $article->getVotesUp() + $article->getVotesDown(),
-            null
-        );
-
-        return $positiveScore - $negativeScore;
+        return 20 * self::bayesianAverage($article->getVotesUp(), $article->getVotesDown());
     }
 
     /**
-     * k * ( 1 - e^-(x/j) )
+     * 1 + k * ( 1 - e^-(x/j) )
      *
      * @param ArticleViewModel $article
      * @param float            $k
@@ -203,11 +214,11 @@ class ArticlesRankingBuilder
      */
     private function getViewsScore(ArticleViewModel $article, float $k, int $j): float
     {
-        return $k * (1 - M_E ** -($article->getViewsCount() / $j));
+        return 1 + $k * (1 - M_E ** -($article->getViewsCount() / $j));
     }
 
     /**
-     * k * ( 1 - e^-(x/j) )
+     * 1 + k * ( 1 - e^-(x/j) )
      *
      * @param ArticleViewModel $article
      * @param float            $k
@@ -217,7 +228,7 @@ class ArticlesRankingBuilder
      */
     private function getCommentsScore(ArticleViewModel $article, float $k, int $j): float
     {
-        return $k * (1 - M_E ** -($article->getCommentsCount() / $j));
+        return 1 + $k * (1 - M_E ** -($article->getCommentsCount() / $j));
     }
 
     /**
@@ -264,7 +275,7 @@ class ArticlesRankingBuilder
     {
         $interval = (new \DateTime())->getTimestamp() - $article->howOldIsDateTime()->getTimestamp();
 
-//        return M_E ** -($interval / $lambda);
+//        return exp(-$interval / $lambda);
 
         return 1 + (($interval / $lambda) ** 2);
 
