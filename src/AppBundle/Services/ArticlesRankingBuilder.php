@@ -11,8 +11,8 @@ use AppBundle\ViewModel\Article as ArticleViewModel;
  */
 class ArticlesRankingBuilder
 {
-    const PRIOR_UP   = 10;
-    const PRIOR_DOWN = 10;
+    const PRETEND_UP   = 4;
+    const PRETEND_DOWN = 10;
 
     /**
      * @var int
@@ -189,7 +189,7 @@ class ArticlesRankingBuilder
      */
     private static function bayesianAverage(int $upVotes, int $downVotes)
     {
-        return ($upVotes + self::PRIOR_UP) / ($upVotes + self::PRIOR_UP + $downVotes + self::PRIOR_DOWN);
+        return ($upVotes + self::PRETEND_UP) / ($upVotes + self::PRETEND_UP + $downVotes + self::PRETEND_DOWN);
     }
 
     /**
