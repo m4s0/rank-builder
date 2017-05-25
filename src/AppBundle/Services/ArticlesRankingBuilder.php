@@ -180,7 +180,8 @@ class ArticlesRankingBuilder
 
     /**
      * @see http://www.evanmiller.org/bayesian-average-ratings.html
-     * @see https://en.wikipedia.org/wiki/Bayesian_average
+     *      https://en.wikipedia.org/wiki/Bayesian_average
+     *      http://julesjacobs.github.io/2015/08/17/bayesian-scoring-of-ratings.html
      *
      * @param int $upVotes
      * @param int $downVotes
